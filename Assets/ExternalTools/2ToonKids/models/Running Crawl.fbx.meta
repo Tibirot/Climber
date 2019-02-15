@@ -1,0 +1,262 @@
+fileFormatVersion: 2
+guid: bd874e29d037d684b9288304af8b6ab4
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Boy4
+    100002: hair06
+    100004: ROOT
+    100006: //RootNode
+    100008: TKids
+    100010: TKids Eyebrows
+    100012: TKids Head
+    100014: TKids Jaw
+    100016: TKids L Calf
+    100018: TKids L Clavicle
+    100020: TKids L Finger0
+    100022: TKids L Finger01
+    100024: TKids L Finger02
+    100026: TKids L Finger1
+    100028: TKids L Finger11
+    100030: TKids L Finger12
+    100032: TKids L Finger2
+    100034: TKids L Finger21
+    100036: TKids L Finger22
+    100038: TKids L Finger3
+    100040: TKids L Finger31
+    100042: TKids L Finger32
+    100044: TKids L Finger4
+    100046: TKids L Finger41
+    100048: TKids L Finger42
+    100050: TKids L Foot
+    100052: TKids L Forearm
+    100054: TKids L Hand
+    100056: TKids L Thigh
+    100058: TKids L Toe0
+    100060: TKids L UpperArm
+    100062: TKids LidL
+    100064: TKids LidR
+    100066: TKids Neck
+    100068: TKids Pelvis
+    100070: TKids R Calf
+    100072: TKids R Clavicle
+    100074: TKids R Finger0
+    100076: TKids R Finger01
+    100078: TKids R Finger02
+    100080: TKids R Finger1
+    100082: TKids R Finger11
+    100084: TKids R Finger12
+    100086: TKids R Finger2
+    100088: TKids R Finger21
+    100090: TKids R Finger22
+    100092: TKids R Finger3
+    100094: TKids R Finger31
+    100096: TKids R Finger32
+    100098: TKids R Finger4
+    100100: TKids R Finger41
+    100102: TKids R Finger42
+    100104: TKids R Foot
+    100106: TKids R Forearm
+    100108: TKids R Hand
+    100110: TKids R Thigh
+    100112: TKids R Toe0
+    100114: TKids R UpperArm
+    100116: TKids Smile
+    100118: TKids Spine
+    100120: TKids Spine1
+    100122: TKids Spine2
+    100124: TKidseyeL
+    100126: TKidseyeR
+    400000: Boy4
+    400002: hair06
+    400004: ROOT
+    400006: //RootNode
+    400008: TKids
+    400010: TKids Eyebrows
+    400012: TKids Head
+    400014: TKids Jaw
+    400016: TKids L Calf
+    400018: TKids L Clavicle
+    400020: TKids L Finger0
+    400022: TKids L Finger01
+    400024: TKids L Finger02
+    400026: TKids L Finger1
+    400028: TKids L Finger11
+    400030: TKids L Finger12
+    400032: TKids L Finger2
+    400034: TKids L Finger21
+    400036: TKids L Finger22
+    400038: TKids L Finger3
+    400040: TKids L Finger31
+    400042: TKids L Finger32
+    400044: TKids L Finger4
+    400046: TKids L Finger41
+    400048: TKids L Finger42
+    400050: TKids L Foot
+    400052: TKids L Forearm
+    400054: TKids L Hand
+    400056: TKids L Thigh
+    400058: TKids L Toe0
+    400060: TKids L UpperArm
+    400062: TKids LidL
+    400064: TKids LidR
+    400066: TKids Neck
+    400068: TKids Pelvis
+    400070: TKids R Calf
+    400072: TKids R Clavicle
+    400074: TKids R Finger0
+    400076: TKids R Finger01
+    400078: TKids R Finger02
+    400080: TKids R Finger1
+    400082: TKids R Finger11
+    400084: TKids R Finger12
+    400086: TKids R Finger2
+    400088: TKids R Finger21
+    400090: TKids R Finger22
+    400092: TKids R Finger3
+    400094: TKids R Finger31
+    400096: TKids R Finger32
+    400098: TKids R Finger4
+    400100: TKids R Finger41
+    400102: TKids R Finger42
+    400104: TKids R Foot
+    400106: TKids R Forearm
+    400108: TKids R Hand
+    400110: TKids R Thigh
+    400112: TKids R Toe0
+    400114: TKids R UpperArm
+    400116: TKids Smile
+    400118: TKids Spine
+    400120: TKids Spine1
+    400122: TKids Spine2
+    400124: TKidseyeL
+    400126: TKidseyeR
+    2100000: hair06
+    2100002: boy4
+    2100004: eye4
+    2100006: chestC
+    2100008: legs
+    2100010: feetB
+    2300000: hair06
+    3300000: hair06
+    4300000: hair06
+    4300002: Boy4
+    7400000: mixamo.com
+    9500000: //RootNode
+    13700000: Boy4
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: boy4
+    second: {fileID: 2100000, guid: 40ca6482b8c3b0e4aa3a3ea6f0a6b11c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chestC
+    second: {fileID: 2100000, guid: 49616eddcc8370b4da499f1f9b3f1485, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye4
+    second: {fileID: 2100000, guid: 95d68f07c2a34c44c85fe5f144e008e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: feetB
+    second: {fileID: 2100000, guid: 86d0714b4658f0647bcbfaff5df5a417, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hair06
+    second: {fileID: 2100000, guid: 61f9f454c95d88a48af78eca79ccd9bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: legs
+    second: {fileID: 2100000, guid: 43155a6a67fb3f14b85b075de7fd36b8, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 0
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,600 @@
+============================================================================
+ RELEASE NOTES - Documentation at https://www.skaredcreations.com/api/combu
+============================================================================
+
+
+VERSION 3.1.1
+
+Unity:
+- Added new method UserFile.Load to load a user file by passing the Id
+- Implemented sample script CheckMail that can be attached to the CombuManager game object and be used to notify your scripts upon new in-game messages received from other users (https://www.skaredcreations.com/wp/community/combu/push-notification-by-onesignal/#post-1049)
+
+
+Server:
+- Added new webservice user_files/load to load a user file by passing the Id
+- Added new optional constant variable REGISTER_EMAIL_REQUIRED_FOR_GUEST to require email for new guest users (TRUE to require email, FALSE to skip the verification)
+- Fixed Utils::GetServerUrl and Utils::GetUploadUrl for links on Windows machine, implemented new method Utils::CombineUrl to get combined paths as URL
+- Fixed ServerSettings::GetCurrentSettings to correctly set in $serverClientKeys both names and values of server settings visible to clients
+- AppId::Delete now deletes recursively all data related to it (AppCustomData, AccountApp, Leaderboards, etc.)
+- Added new event AddonModule::OnUserProcessOutput(&$userData) that is called in Account::ToArrayFiltered to filter or edit the account data output to webservices
+- Minor fixes and optimizations
+
+--
+
+VERSION 3.1.0
+
+Unity:
+- Added overloads to method Leaderboard.LoadScoresByUser to load the score of a user by passing the id or userName
+- Added overload to method CombuPlatform.LoadScores to load a page by passing the timeScope of the leaderboard
+
+Server:
+- Added support to load by Username the leaderboard's scores of a user
+- Added a new sample script in /extra folder which deletes the Session Tokens older than 7 days (configurable in a variable), you can use this in a scheduled job on your server OS to be executed once per week for example
+- Fixed bug not saving the AppCustomData of a created user
+- Fixed bug in Admin > Client Users > User Profile > Save which stored the password in clear instead of encrypted when changing password or creating a new user
+- Fixed bug in Admin > Session Tokens which caused the page to not work for changing the date and delete the tokens
+- Improved SQL queries for search of client users
+- Minor changes to administration UI
+
+--
+
+VERSION 3.0.15
+
+Unity:
+- Fixed bug in CombuUtils.IsHigherVersion not correctly returning the correct result
+- Added method User.GetContact to get the contact information of a user related to localUser
+
+Server:
+- Fixed bug in total results count from queries with GROUP BY clause (Combu\DataClass)
+- Registration and username change is now denied if the username starts with the text set for GUEST_PREFIX in config.php
+- Added new API action contacts/check to get the contact information of a user related to localUser
+- Web: Users who haven't still activated their account (if REGISTER_EMAIL_ACTIVATION is TRUE) are now evident in Client Users
+- Web: Fixed minor issues in Tools > Prune where Select/Deselect All were not working
+
+Documentation has been improved with new additions and details (https://www.skaredcreations.com/api/combu/v3/).
+
+--
+
+VERSION 3.0.14
+
+Unity:
+- Class Combu.Profile: added new property appCustomData as Hashtable to store custom data with scope to the current App (you can still use the property customData to store the custom data visible to all apps)
+- Moved all enum types into CombuEnums.cs
+- Moved class CombuServerInfo into its own file
+
+Server:
+- Added new configuration constants in config.php: DENY_UNVERSIONED_CLIENT (to deny the connections from clients who doesn't send their Combu version), MIN_CLIENT_VERSION (set maximum CombuManager.COMBU_VERSION to allow connections), MAX_CLIENT_VERSION  (set minimum CombuManager.COMBU_VERSION to allow connections), DENY_OUTRANGE_VERSIONS (deny the connections of out of range versions)
+- Added new table and class AppCustomData to store custom data for AppId scope
+- Added new table field and class property SessionToken->ClientVersion where the token generator stores the client version
+- Fixed bug in applying the SQL queries coming from auto-updater when a GAME_DB_PREFIX was specified in the config.php
+- Web: added bootstrap dependency in the web admin panel and revisited the layout to fill the screen
+- Web: added search filter by IP in Client Users (doing a LIKE match with SessionToken::IPAddress)
+- Web: added new tab App Custom Data in the detail of Client Users
+- Web: added possibility to upload a new file in Client Users details page
+- Web: implemented page to customize the interface of admin area by adding your CSS code to override the default (in Tools > Utilities > Customize interface)
+
+Database:
+- Added new field ClientVersion in the table SessionToken
+- Created new table AppCustomData
+
+
+Queries to upgrade the database:
+
+ALTER TABLE `SessionToken` ADD COLUMN `ClientVersion` VARCHAR(20) NULL;
+
+CREATE TABLE `AppCustomData` (
+  `IdApp` bigint(20) NOT NULL,
+  `IdAccount` bigint(20) NOT NULL,
+  `DataKey` varchar(45) NOT NULL,
+  `DataValue` text,
+  PRIMARY KEY (`IdApp`,`IdAccount`,`DataKey`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--
+
+VERSION 3.0.13
+
+Server:
+- Fixed bug in web service mail/list_conv (loading conversations)
+
+--
+
+VERSION 3.0.12
+
+Unity:
+- Added overloads of User.AddContact and User.RemoveContact that accept the User's id to add/remove to the contact list of an account
+
+Server:
+- Optimized code in contacts/save
+
+--
+
+VERSION 3.0.11
+
+Server:
+- Fixed web services contacts/save and contacts/delete for pending requests sent from localUser
+
+--
+
+VERSION 3.0.10
+
+Unity:
+- Implemented eContact.PendingRequest enum value and User.pendingRequests property to load the pending friendship requests sent from localUser to the other users
+
+Server:
+- Implemented logic in "contacts" web service and Friend class to load the pending friendship requests sent from LoggedAccount to other users
+- Implemented IP Bans in the administration website to allow the administrators to ban client IP addresses (the client requests from banned IPs will be unauthorized)
+- Added search filter for IP address in Administration > Session Tokens
+- New configuration defines available to be added in config.php: LOG_BANNED (if TRUE then the system will log the requests from banned IP address), LOG_UNAUTHORIZED (if TRUE then the system will log the unauthorized/invalid requests)
+- Changed to '644' (read/write) the permissions of files downloaded from Updater tool and small improvements to updater
+
+Database:
+- Added new table `IpBan`
+
+--
+
+VERSION 3.0.9
+
+Server:
+- Fixed function getRequestInput() in the admin web application
+- Fixed exception in Achievements admin section
+- Updated Combu updater URL
+
+--
+
+VERSION 3.0.8
+
+Server:
+- /_setup: database.xml for database creation was missing the field "Code" in table "Leaderboard"
+
+--
+
+VERSION 3.0.7
+
+Unity:
+- Bug fix in account registration when an auto-ping interval was set
+
+--
+
+VERSION 3.0.6
+
+Server:
+- By now the Newsletters will not be sent to the disabled accounts
+- Added new defines to configure SMTP options for sending emails (as alternative to local mail server) available to config.php: EMAIL_SMTP (if TRUE then SMTP will be used), EMAIL_SMTP_SECURE (can be NULL, 'ssl' or 'tls'), EMAIL_SMTP_HOSTNAME (e.g. smtp.gmail.com), EMAIL_SMTP_PORT (e.g. 465), EMAIL_SMTP_USERNAME, EMAIL_SMTP_PASSWORD
+
+--
+
+VERSION 3.0.5
+
+Unity:
+- Added new property 'code' to class Leaderboard (you can now use 'code' or 'id' to any method requiring leaderboard's id)
+
+Server:
+- web services that require leaderboard's id now accepts also the leaderboard's code as 'id' parameter
+- You can now specify the Leaderboard Code property in the web admin
+
+Database:
+ALTER TABLE `LeaderBoard` ADD COLUMN `Code` VARCHAR(45) NOT NULL AFTER `IdApp`;
+
+--
+
+VERSION 3.0.4
+
+Unity:
+- Fixed storing credentials upon successful User.CreateGuest()
+
+--
+
+VERSION 3.0.3
+
+Unity:
+- Added overload method User.AutoLogin<T> to create localUser as T
+
+Database:
+- The field Active of table AppId has been changed from type bit(1) to tinyint(1)
+
+SQL to upgrade database:
+ALTER TABLE `AppId` CHANGE COLUMN `Active` `Active` TINYINT(1) NOT NULL;
+
+
+--
+
+VERSION 3.0.2
+
+Server:
+- Improvements in server auto-updater
+- Fixed loading visible server settings sent to client
+
+--
+
+VERSION 3.0.1b
+
+Database:
+- Increased Leaderboard.ValueFloat size to DECIMAL(20,6)
+
+SQL to upgrade database:
+ALTER TABLE `LeaderBoard_User` CHANGE COLUMN `ValueFloat` `ValueFloat` DECIMAL(20,6) NOT NULL;
+
+
+--
+
+VERSION 3.0.1a
+
+Server:
+- Fixed issue in web admin "Client Users" loading achievements
+
+--
+
+VERSION 3.0.1
+
+Unity:
+- Added new item "Unread" to enum eMailList to load unread messages
+- Added handler for Leaderboard.userScope (UserScope.Global, UserScope.FriendOnly) in method Leaderboard.LoadScores
+- Added new static method CombuPlatform.ResetAllAchievements to reset all achievements of localUser
+
+Server:
+- Implemented auto-updater for server (may require write permissions to whole Combu folder)
+- Added new message type "Unread" to web service "mail/list"
+- Added handler for new request parameter "UserScope" in web service "leaderboards/highscore" to filter the user scope (global, friends only)
+- Added new action "reset" to web service "achievements" to reset all achievements of $LoggedAccount
+- Added new class "Visible" to class "ServerSettings" that will be filtered when sending the settings to the clients
+- Minor changes and fixes
+
+--
+
+VERSION 3.0.0
+Full release notes at http://skaredcreations.com/wp/combu-3-release-notes/
+
+Unity:
+- Created new class CombuEncryption to handle RSA/AES/SHA1/MD5 encryption
+- Created new class CombuForm to handle all the web services request data (every class and method now uses this instead of WWWForm to encrypt the data sent to the server)
+- Removed property CombuManager.secretKey (the new client-server security is automatically handled without any secret key)
+- Added new property CombuManager.language (localization for error messages from web services, it must exists the file '/error_messages/error_'+language+'.php', default supported languages: 'en', 'it')
+- Added new properties CombuManager.rememberCredentials and CombuManager.rememberPlainPassword to store the credentials in PlayerPrefs after User.Authenticate when using username and password
+- Removed method User.AuthenticateSession
+- Created new methods User.CanAutoLogin and User.AutoLogin for auto-authenticate localUser from credentials stored in PlayerPrefs
+
+Server:
+- The server side code has been severaly refactored to use Composer autoloader (http://getcomposer.org/)
+- All the classes and table names have been renamed removing the prefix "CB_" (if you are upgrading from 2.x then you need to set GAME_DB_PREFIX to "CB_" in your config.php) and the classes have been enclosed inside the namespace \Combu\
+- Implemented the generation of RSA certificate for each client connection and AES decryption of request data for web services
+- Added the open source library "phpseclib 2.x" to implement encryption/decryption of data: http://phpseclib.sourceforge.net/
+- The web services now interpret the data encrypted from client and not directly from $_REQUEST
+- Added new constants in /lib/config.php: GAME_DB_USE_PDO (if TRUE then PDO class is used for database functions, else mysqli is used), GAME_DB_TYPE (database engine, currently only 'mysql' is supported), GAME_DB_PORT (database port, default MySql is 3306), RANDOM_CODE_CHARS (alphanumeric characters used to generate a random code), RANDOM_CODE_LENGTH (default length of a random code), RESPONSE_ENCRYPTED (if TRUE then the server response is encrypted before being sent to client), UPLOAD_DELETE_OLD_FILES (if TRUE will delete old file upon upload of new content for the same UserFile)
+- The email templates for account registration and reset password have been moved to /email_templates
+- Created new folder /error_messages containing the language files for localization of error messages from web services (default files 'errors_'+language+'.php' with support of custom messages and override messages if the file 'errors_'+language+'_custom.php' exists, for example: 'errors_en.php' and optional 'errors_en_custom.php')
+- Created folder /_setup inside the root folder of Combu, you can access this URL to create both the SQL statements (to execute on your database to create the tables) and the content of your config.php (it is recommended to not publish this folder on production environment)
+
+--
+
+VERSION 2.1.14
+
+Server:
+- Fixed warning in CB_Account::SetSession
+- Fixed issues in every call to DataClass::CountRecords when GAME_DB_PREFIX is set to a value
+
+--
+
+VERSION 2.1.13
+
+Unity:
+- Minor change to AutoPing and Ping functions to update the currently logged user data after successful ping was received
+
+Server:
+- Added support for prefix to table names, now you can host multiple Combu installations in the same database (define "GAME_DB_PREFIX" in /lib/config.php)
+- Added new property AddonModule:Version for versioning of the addons
+- Fixed highlighting of all sub-menus of every addon in admin console
+- Added tooltip to the section headers of addons in the admin console menus with name and version of the addon
+- New buttons in Players > Edit section of the admin console: DELETE ALL SCORES, DELETE SCORE FROM LEADERBOARD, RESET ALL ACHIEVEMENTS, RESET ACHIEVEMENT
+- Fixed issue in CB_Account_Platform:Save
+- Fixed issue in deleting a record in Server Setting admin page
+
+--
+
+VERSION 2.1.12
+
+Unity:
+- Added support to Unity 5.5
+
+--
+
+VERSION 2.1.11
+
+Server:
+- Fix to authenticate session webservice
+
+--
+
+VERSION 2.1.10
+
+Unity:
+- Fixed issues preventing to build Universal App for Windows Store
+- Added new property UserFile.customData
+- Added new methods Mail.Unread, Mail.Unread(long) to mark a message as unread
+- Added new method User.CreateGuest to create a new guest account
+- Added new property CombuManager.GuestPrefix in inspector to use as prefix to the id for guest accounts (ex.: "Guest-" to obtain "Guest-1".."Guest-N")
+- Added new method User.AuthenticateSession to auto-login an account passing the id and sessionToken that you saved previously
+- CombuManager.timezone has been deprecated, since now the timestamps in the database should be stored in UTC (clients can convert to/from local timezone through DateTime if needed)
+
+Server:
+- Added new property CB_UserFile.customData
+- Added search by email in the web page Admin > Players
+- Added feature Create Player in the web page Admin > Players
+- Added action 'unread' to mail webservice
+- Added action 'login_session' to users webservice
+- Fixed issue in CB_LeaderBoard::LoadHighscoreForAccount
+- Fixed issue in search by Online state in the web page Admin > Players
+
+--
+
+VERSION 2.1.9
+
+Unity:
+- Fixed demo scenes for Unity 5.3+
+
+Server:
+- Minor fixes and code optimizations
+
+--
+
+VERSION 2.1.8
+
+Unity:
+- Fixed User.Delete (password is now encrypted)
+- Added new overload Mail.Read(long, System.Action<bool,string>) to mark a single message as read by its Id
+
+Server:
+- Fixed issue when creating a new user while being already authenticated with another account
+- Replaced all "exit" occurrences in webservices output with "Utils::EchoJson" to add proper headers (fix for WebGL and/or different domain/port)
+- Fixed security issue in AuthenticatePlatform that allowed disabled accounts to login
+
+--
+
+VERSION 2.1.7
+
+Server:
+- Minor change: added "Access-Control-*" headers to Utils::EchoJson to help solve issues in WebGL running on different domain (e.g.: Facebook Canvas)
+
+--
+
+VERSION 2.1.6
+
+Server:
+- Bug fix: CustomData of UserGroup is now correctly saved on database
+
+--
+
+VERSION 2.1.5
+
+Server:
+- Bug fix in leaderboard load scores to send local player score
+
+Unity:
+- Leaderboard.LoadScores now correctly initialize both "scores" array and "localUserScore" object
+
+--
+
+VERSION 2.1.4
+
+Server:
+- Bug fixes to user search by multiple custom data
+- Bug fixes to user groups loaded by owner/member username
+
+Unity:
+- Added new property "name" to the class UserFile (this property is not unique, neither per account nor per table)
+- You can now pass "null" to UserFile.Update to not change the file content (if you pass "new byte[0]" it will upload an empty file)
+- The method CombuManager.CaptureScreenshot has been changed to static and now renders all cameras
+
+--
+
+VERSION 2.1.3
+
+Server:
+- Bug fixes to user groups
+
+Unity:
+- Added groupName parameter to overload of UserGroup.Load to search groups by name
+
+--
+
+VERSION 2.1.2
+
+Server:
+- Bug fix in security token management and serving any web service
+- Replaced mktime() with time() where needed (strict rule from PHP 5.1+)
+
+Database:
+- Removed fields from table CB_Account: GUID, SignatureTimestamp
+
+--
+
+VERSION 2.1.1
+
+Server:
+- Fixed bug in saving account customData
+- Web service groups/list has been improved to allow loading of all public groups
+- Class AddonModule has new method NotifyUserLogout to notify all add-ons when the user logged off
+- Added new class CB_Session to store the login sessions of players
+
+Unity:
+- Added new properties to UserGroup class: "idOwner", "owner", "customData"
+- Added new overload to load all groups: UserGroup.Load(pageNumber, limit, callback)
+- Added new methods UserGroup.LoadMembership to load the groups where the user is member
+- UserGroup.Load retrieves only the group owner by the user
+- You can now login the same account from different sources
+
+Database:
+- Added new table CB_Session
+
+--
+
+VERSION 2.1.0
+
+Server:
+- Bug fix in user creation: ENABLED is correctly set TRUE by default
+- Searching users by custom data now works for numeric data
+- A new class AddonModule has been added, it can be used to create add-ons in the folder /addons more informations coming in the next days on http://skaredcreations.com
+
+Unity:
+- Fixed CombuManager.isAuthenticated
+- Added parameter Timezone to every calls, if not empty in CombuManager
+- Added new properties to User class: "ignored" and "requests", these and "friends" are assigned when you call User.LoadFriends basing on the contact type requested
+
+--
+
+VERSION 2.0.7
+
+Server:
+- Added informations about online users in Administration homepage and Players
+
+Unity:
+- Added new parameter isOnline to method User.Load to filter the online users
+
+--
+
+VERSION 2.0.6
+
+Server:
+- Fixed issue in webservice groups/wsSave preventing correctly initialization of the group after save
+
+--
+
+VERSION 2.0.5
+
+Server:
+- Added sample script extra/login_wordpress.php to show how to integrate Combu with Wordpress accounts
+- Fixed issue in webservice groups/wsList
+- Added new class CB_ServerSettings and new section SETTINGS in Admin Console
+- Added possibility to send newsletters to a test email address before sending to everyone else
+- Updated and fixed the sample scripts in /pages showing off how to use the server API for your website
+
+Unity:
+- Added new property 'settings' to the class CombuServerInfo
+- Added new sample scene CombuDemoWordpress that uses the sample script login_wordpress.php
+- Minor changes
+
+--
+
+VERSION 2.0.4
+
+Server:
+- Added sample code in users/wsCreate and users/wsLoginPlatform to add starting inventory to new users
+
+
+--
+
+VERSION 2.0.3
+
+Server:
+- Fixed issue in Inventory.Load webservice
+
+
+--
+
+VERSION 2.0.2
+
+Unity:
+- Fixed account update: Id of logged user is now correctly sent
+
+
+--
+
+VERSION 2.0.1
+
+Unity:
+- Fixed account creation: password is now sent encrypted
+
+
+--
+
+VERSION 2.0
+
+Server:
+- Implemented new classes CB_Account_Platform, CB_Tournament, CB_Tournament_CustomData, CB_Match, CB_Match_Account, CB_Match_CustomData, CB_Match_Round
+- Added support to unlimited number of account platforms to associate to Combu accounts (use PlatformKey to differentiate Facebook, GameCenter, etc.)
+- Added webservice to link an account to a platform account (external platforms like Facebook)
+- Implemented new webservices server/info, server/ping
+- Some webservices have been slitly modified to work with the new API
+- Improvement to the web Administration layout
+- You can now disable a player in the admin console and deny him to login
+
+Database:
+- New tables CB_Account_Platform, CB_Tournament, CB_Tournament_CustomData, CB_Match, CB_Match_Account, CB_Match_CustomData, CB_Match_Round
+- Removed fields in CB_Account: FacebookId, GameCenterId
+- Added fields in CB_Account: Enabled
+
+Unity:
+- The API has been completely refactored, CombuManager is the new main component (it replaces the old CBManager) and you can access to localUser, platform or any core class in the namespace Combu.
+- The documentation of the new API is online at http://skaredcreations.com/api/combu/
+
+--
+
+VERSION 1.5.4
+
+Combu files have not been modified. This version is only to release the unitypackage of Combu 2.0 Release Candidate,
+it will bring a fresh new air to Combu as it will now adheres the Unity standard of ISocialPlatform.
+You will need to make some changes to your code, but almost everything you wrote till now is easily
+portable to the new Combu classes that have been completely refactored to implement the interfaces of ISocialPlatform.
+You will find the full new documentation online at http://skaredcreations.com/api/combu/last
+
+--
+
+VERSION 1.5.3
+
+Server:
+- Fixed SQL statement filters in CB_UserFilesActivity::Load, CB_Mail::Load, CB_Mail::LoadUnread, CB_UserGroupAccount::Load
+- Logged users cannot send more than one Like to a UserFile
+- Web admin console: you can now see and change Email in Player Info
+
+Unity:
+- Fixed date/time conversion of CBNews.date from JSON
+
+
+--
+
+VERSION 1.5.2
+
+Updated Combu web files, latest was missing the webservice handler for mail count.
+
+--
+
+VERSION 1.5.1
+
+Server:
+- Fixed define SECURITY_ENABLED in api.php to re-enable the security
+- New web service "users/search" to make a search in the user accounts table
+- New web service "mail/count" to get the number of read and unread messages
+- Web service "mail/read" now accept parameter Id to be -1 so that it can mark as read all messages received by the logged user
+
+Unity:
+- Added new method CBManager/LoadUsers to search users
+- Added new method CBManager/CountMail to get the numbers of read and unread messages received by the logged user
+- Added new class CBMailCount to handle the results from CBManager/CountMail
+- Added overload CBManager/ReadMail without any parameters to mark as read all messages received by the logged user
+
+--
+
+VERSION 1.5.0
+
+Server:
+- Web service "users/load" accepts also Username to load an account
+- Web service "users/update" accepts also Username to update an account
+- Web service "users/update" can change the Username of the account if you pass both Id and Username
+- Web service "mail/send" now accepts parameters Id and Username containing multiple recipients separated by column and new parameter IdGroup to send messages to whole group
+- Added new web service "groups" to manage user groups
+
+Unity:
+- Added overload method CBManager/LoadUser accepting parameter Username
+- Method CBManager/UpdateUser now sends the parameter Username
+- Method CBManager/SendMail was changed to support the list type "Received", "Sent" and "Both" (instead of only received or sent)
+- Added overload methods CBManager/SendMail accepting array of Usernames or Ids to send messages to custom group of users
+- Added method CBManager/SendMailToGroup to send messages to a group Id
+- Added method CBManager/LoadMailConversations to load a list of recipients (single users or groups)
+- Added methods CBManager/UserGroupLoad, CBManager/UserGroupSave, CBManager/UserGroupDelete, CBManager/UserGroupJoin and CBManager/UserGroupLeave to manage groups of users
+- Added a new demo scene DemoMessages with a simple implementation of message discussions similar to Facebook, Whatsapp etc
+
+Database:
+- Added new field `IdGroup` to table `CB_Mail`
+- Added new table `CB_UserGroup`
+- Added new table `CB_UserGroupAccount`
