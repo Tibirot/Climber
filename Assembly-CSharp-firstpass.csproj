@@ -1175,6 +1175,27 @@
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.5f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
+ <Reference Include="DOTween">
+ <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/ExternalTools/SWS/Extensions/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity">
+ <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/FacebookSDK/Plugins/Facebook.Unity.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity.Gameroom">
+ <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/FacebookSDK/Plugins/Gameroom/Facebook.Unity.Gameroom.dll</HintPath>
+ </Reference>
+ <Reference Include="FacebookNamedPipeClient">
+ <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/FacebookSDK/Plugins/Gameroom/FacebookNamedPipeClient.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity.Settings">
+ <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/FacebookSDK/Plugins/Settings/Facebook.Unity.Settings.dll</HintPath>
+ </Reference>
+ <Reference Include="RainbowCore">
+ <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/Plugins/RainbowAssets/!Core/Assemblies/RainbowCore.dll</HintPath>
+ </Reference>
+ <Reference Include="RainbowHierarchy">
+ <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/Plugins/RainbowAssets/RainbowHierarchy/Assemblies/RainbowHierarchy.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>E:/Tibi Work/Games inDev/Climber/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
@@ -1189,27 +1210,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>E:/Tibi Work/Games inDev/Climber/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/ExternalTools/SWS/Extensions/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="Facebook.Unity.Gameroom">
- <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/FacebookSDK/Plugins/Gameroom/Facebook.Unity.Gameroom.dll</HintPath>
- </Reference>
- <Reference Include="RainbowHierarchy">
- <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/Plugins/RainbowAssets/RainbowHierarchy/Assemblies/RainbowHierarchy.dll</HintPath>
- </Reference>
- <Reference Include="FacebookNamedPipeClient">
- <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/FacebookSDK/Plugins/Gameroom/FacebookNamedPipeClient.dll</HintPath>
- </Reference>
- <Reference Include="Facebook.Unity">
- <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/FacebookSDK/Plugins/Facebook.Unity.dll</HintPath>
- </Reference>
- <Reference Include="RainbowCore">
- <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/Plugins/RainbowAssets/!Core/Assemblies/RainbowCore.dll</HintPath>
- </Reference>
- <Reference Include="Facebook.Unity.Settings">
- <HintPath>E:/Tibi Work/Games inDev/Climber/Assets/FacebookSDK/Plugins/Settings/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.5f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

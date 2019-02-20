@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5474277653534483592}
   - component: {fileID: 5474277653534483589}
   - component: {fileID: 5474277653534483588}
-  - component: {fileID: 5474277653534483591}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -138,39 +137,3 @@ MonoBehaviour:
   ConstantShakePresets: []
   StartConstantShakePreset: {fileID: 0}
   CurrentConstantShakePreset: {fileID: 0}
---- !u!114 &5474277653534483591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5474277653534483593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 963e3a12d9d70497eb85dd9797a55987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pc2D: {fileID: 5474277653534483589}
-  OnCinematicStarted:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnCinematicTargetReached:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Com.LuisPedroFonseca.ProCamera2D.CinematicEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  OnCinematicFinished:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  CinematicTargets: []
-  EndDuration: 1
-  EndEaseType: 2
-  UseNumericBoundaries: 0
-  UseLetterbox: 1
-  LetterboxAmount: 0.384
-  LetterboxAnimDuration: 1
-  LetterboxColor: {r: 0, g: 0, b: 0, a: 1}

@@ -272,7 +272,9 @@ namespace VirtualInfinityStudios.GamePlay
                     distantareColectabileStanga += offsetColectabilVertical;
                     Vector3 pozGenerareColectabileStg = new Vector3(pozIncGenerareColStanga.x, pozIncGenerareColStanga.y + distantareColectabileStanga, -offsetColectabilOrizontal);
 
-                    VIS_Colectabil _clonaCol = Instantiate(prefabsColectabile[0], pozGenerareColectabileStg, Quaternion.identity);
+                    int indxAleatoriuCol = UnityEngine.Random.Range(0, prefabsColectabile.Count);
+
+                    VIS_Colectabil _clonaCol = Instantiate(prefabsColectabile[indxAleatoriuCol], pozGenerareColectabileStg, Quaternion.identity);
                     _clonaCol.transform.SetParent(holderColectabileStanga);
                     string _numeCol = "COL_STNG_" + i;
                     _clonaCol.name = _numeCol;
@@ -295,7 +297,9 @@ namespace VirtualInfinityStudios.GamePlay
                     distantareColectabileDreapta += offsetColectabilVertical;
                     Vector3 pozGenerareColectabileDrt = new Vector3(offsetColectabilOrizontal, pozIncGenerareColDreapta.y + distantareColectabileDreapta, pozIncGenerareColDreapta.z);
 
-                    VIS_Colectabil _clonaCol = Instantiate(prefabsColectabile[0], pozGenerareColectabileDrt, _rotDreapta);
+                    int indxAleatoriuCol = UnityEngine.Random.Range(0, prefabsColectabile.Count);
+
+                    VIS_Colectabil _clonaCol = Instantiate(prefabsColectabile[indxAleatoriuCol], pozGenerareColectabileDrt, _rotDreapta);
                     _clonaCol.transform.SetParent(holderColectabileDreapta);
                     string _numeCol = "COL_DREAPTA_" + i;
                     _clonaCol.name = _numeCol;

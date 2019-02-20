@@ -11,6 +11,7 @@ TagManager:
   - VIS/Obstacole
   - VIS/Shredder
   - VIS/Pilon
+  - VIS/Colectabil
   layers:
   - Default
   - TransparentFX

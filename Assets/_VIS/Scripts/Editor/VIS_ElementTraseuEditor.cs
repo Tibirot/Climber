@@ -18,18 +18,32 @@ namespace VirtualInfinityStudios.GamePlay
         protected VIS_ElementTraseu segment;
 
         // GRAFICE:
+        //-MENIU
         Color culoarePrestabilit;
         Texture2D logoVIS;
         Texture2D tab_SETARI;
         Texture2D tab_OBSTACOLE;
         Texture2D tab_COLECTABILE;
 
+        //-OBSTACOLE
         Texture2D but_AdaugaStanga;
         Texture2D but_AdaugaDreapta;
         Texture2D but_EliminareObs;
         Texture2D but_AranjareAutoObs;
         Texture2D banda_UC;
 
+        //-COLECTABILE
+        Texture2D but_AdaugaColStanga;
+        Texture2D but_AdaugaColDreapta;
+        Texture2D but_AdaugaColAmbeleDir;
+        Texture2D but_EliminaColStanga;
+        Texture2D but_EliminaColDreapta;
+        Texture2D but_EliminaColAmbeleDir;
+        Texture2D but_AjustDistCol_Off;
+        Texture2D but_AjustDistCol_On;
+        Texture2D but_AplicaModificariMan;
+
+        //-LISTE REORDER
         Texture2D ico_ochi;
         Texture2D ico_ochiOff;
 
@@ -106,6 +120,9 @@ namespace VirtualInfinityStudios.GamePlay
 
         bool afiseazaColectabileStanga = true;
         string status = "AFISARE LISTA";
+        string statusEdiColectabile = "";
+
+
 
 
         private void Awake()
@@ -127,7 +144,17 @@ namespace VirtualInfinityStudios.GamePlay
             ico_ochi = Resources.Load("VIS_GUI/ICO_ELIMINA", typeof(Texture2D)) as Texture2D;
             ico_ochiOff = Resources.Load("VIS_GUI/ICO_Ochi", typeof(Texture2D)) as Texture2D;
 
-            but_ImgEditareColectabile = Resources.Load("VIS_GUI/ED_Buton_Eliminare_Obstacole", typeof(Texture2D)) as Texture2D;
+            //-COLECTABILE
+            but_ImgEditareColectabile = Resources.Load("VIS_GUI/ED_Buton_Ajustare_ColectabileOFF", typeof(Texture2D)) as Texture2D;
+            but_AdaugaColStanga = Resources.Load("VIS_GUI/ED_Buton_Adauga_ColectabileST", typeof(Texture2D)) as Texture2D;
+            but_AdaugaColDreapta = Resources.Load("VIS_GUI/ED_Buton_Adauga_ColectabileDR", typeof(Texture2D)) as Texture2D;
+            but_AdaugaColAmbeleDir = Resources.Load("VIS_GUI/ED_Buton_Adauga_ColectabileSTDR", typeof(Texture2D)) as Texture2D;
+            but_EliminaColStanga = Resources.Load("VIS_GUI/ED_Buton_Eliminare_ColectabileST", typeof(Texture2D)) as Texture2D;
+            but_EliminaColDreapta = Resources.Load("VIS_GUI/ED_Buton_Eliminare_ColectabileDR", typeof(Texture2D)) as Texture2D;
+            but_EliminaColAmbeleDir = Resources.Load("VIS_GUI/ED_Buton_Eliminare_Colectabile", typeof(Texture2D)) as Texture2D;
+            but_AjustDistCol_Off = Resources.Load("VIS_GUI/ED_Buton_Ajustare_ColectabileOFF", typeof(Texture2D)) as Texture2D;
+            but_AjustDistCol_On = Resources.Load("VIS_GUI/ED_Buton_Ajustare_ColectabileON", typeof(Texture2D)) as Texture2D;
+            but_AplicaModificariMan = Resources.Load("VIS_GUI/ED_Buton_Aplica_Modificari", typeof(Texture2D)) as Texture2D;
         }
 
         public void OnEnable()
@@ -468,67 +495,76 @@ namespace VirtualInfinityStudios.GamePlay
                 EditorGUILayout.PropertyField(sp_offsetColectabileO, new GUIContent("Offset Colectabile Orizontal"));
                 EditorGUILayout.PropertyField(sp_offsetColectabileV, new GUIContent("Offset Colectabile Vertical"));
 
+                GUILayout.Space(15);
 
                 EditorGUILayout.BeginHorizontal();
-                if (GUILayout.Button(but_AdaugaDreapta))
+                GUI.color = Color.white;
+                if (GUILayout.Button(but_AdaugaColStanga))
                 {
                     segment.ADAUGARE_COLECTABILE("Stanga");
                 }
 
 
-                if (GUILayout.Button(but_AdaugaDreapta))
+                if (GUILayout.Button(but_AdaugaColDreapta))
                 {
                     segment.ADAUGARE_COLECTABILE("Dreapta");
                 }
 
-                if (GUILayout.Button(but_AdaugaDreapta))
+                if (GUILayout.Button(but_AdaugaColAmbeleDir))
                 {
                     segment.ADAUGARE_COLECTABILE("Stanga");
                     segment.ADAUGARE_COLECTABILE("Dreapta");
                 }
+                GUI.color = culoarePrestabilit;
                 EditorGUILayout.EndHorizontal();
 
+
+                GUILayout.Space(5);
 
 
                 EditorGUILayout.BeginHorizontal();
-                if (GUILayout.Button(but_EliminareObs))
+                GUI.color = Color.gray;
+                if (GUILayout.Button(but_EliminaColStanga))
                 {
                     segment.ELIMINA_COLECTABILE("Stanga");
                 }
 
 
-                if (GUILayout.Button(but_EliminareObs))
+                if (GUILayout.Button(but_EliminaColDreapta))
                 {
                     segment.ELIMINA_COLECTABILE("Dreapta");
                 }
 
-                if (GUILayout.Button(but_EliminareObs))
+                if (GUILayout.Button(but_EliminaColAmbeleDir))
                 {
                     segment.ELIMINA_COLECTABILE("Stanga");
                     segment.ELIMINA_COLECTABILE("Dreapta");
                 }
-
+                GUI.color = culoarePrestabilit;
                 EditorGUILayout.EndHorizontal();
+
 
                 GUILayout.Space(10);
-                EditorGUILayout.HelpBox("EDITARE AUTOMATA/MANUALA", MessageType.None);
+                EditorGUILayout.HelpBox("EDITARE AVANSATA", MessageType.None);
 
                 EditorGUILayout.BeginHorizontal();
                 if (GUILayout.Button(but_ImgEditareColectabile))
                 {
                     if (!editareColectabile)
                     {
-                        but_ImgEditareColectabile = but_AdaugaDreapta;
+                        but_ImgEditareColectabile = but_AjustDistCol_On;
                         editareColectabile = true;
+                        statusEdiColectabile = "-ATENTIE- OPRESTE AJUSTAREA DISTANTEI DE MAI SUS!";
                     }
                     else
                     {
-                        but_ImgEditareColectabile = but_EliminareObs;
+                        but_ImgEditareColectabile = but_AjustDistCol_Off;
                         editareColectabile = false;
+                        statusEdiColectabile = "";
                     }
                 }
 
-                if (GUILayout.Button("APLICA SCHIMBARI"))
+                if (GUILayout.Button(but_AplicaModificariMan))
                 {
                     //APLICA MODIFICArI MANUAL
                 }
@@ -548,13 +584,26 @@ namespace VirtualInfinityStudios.GamePlay
 
                 EditorGUILayout.EndVertical();
 
+                if (editareColectabile)
+                {
+                    EditorGUILayout.HelpBox(statusEdiColectabile, MessageType.Warning);
+                }
+
+
+                GUILayout.Space(5);
+                GUILayout.Label(banda_UC, EditorStyles.centeredGreyMiniLabel, GUILayout.MaxHeight(16f));
 
                 EditorGUILayout.BeginVertical();
                 GUI.color = Color.yellow;
                 EditorGUILayout.HelpBox("COLECTABILE STANGA", MessageType.None);
                 GUI.color = culoarePrestabilit;
 
-                //GUI.color = Color.gray;
+                //FEEDBACK VISUAL LA AJUSTAREA DISTANTELOR COLECTABILOR
+                if (editareColectabile)
+                {
+                    GUI.color = Color.green;
+                }
+                else { GUI.color = culoarePrestabilit; }
 
                 afiseazaColectabileStanga = EditorGUILayout.Foldout(afiseazaColectabileStanga, status);
                 if (afiseazaColectabileStanga)
@@ -573,7 +622,13 @@ namespace VirtualInfinityStudios.GamePlay
                 EditorGUILayout.HelpBox("COLECTABILE DREAPTA", MessageType.None);
                 GUI.color = culoarePrestabilit;
 
-                GUI.color = Color.gray;
+                //FEEDBACK VISUAL LA AJUSTAREA DISTANTELOR COLECTABILOR
+                if (editareColectabile)
+                {
+                    GUI.color = Color.green;
+                }
+                else { GUI.color = culoarePrestabilit; }
+
 
                 listaColectabileDreapta.DoLayoutList();
                 serializedObject.ApplyModifiedProperties();

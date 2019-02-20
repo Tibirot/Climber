@@ -29,6 +29,7 @@ public class VIS_Jucator : MonoBehaviour
     private Animator animCaracter;
     private Rigidbody rbCaracter;
 
+
     // TOCUH GESTURE RECOGNIZER
     private SwipeGestureRecognizer swipeGesture;
     private readonly List<Vector3> swipeLines = new List<Vector3>();
@@ -53,17 +54,8 @@ public class VIS_Jucator : MonoBehaviour
         CreateSwipeGesture();
     }
 
-    private void Update()
-    {
 
 
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    MoarteCaracter();
-        //}
-
-
-    }
 
     private void FixedUpdate()
     {
@@ -71,7 +63,7 @@ public class VIS_Jucator : MonoBehaviour
         transform.position += directie * Time.deltaTime;
 
         pozitieCurentaY = transform.position.y;
-        distantaParcursa = Mathf.RoundToInt((pozitieCurentaY / 4) - pozitieInitiala);
+        distantaParcursa = Mathf.RoundToInt((pozitieCurentaY / 2) - pozitieInitiala);
     }
 
     private void LateUpdate()
@@ -282,7 +274,7 @@ public class VIS_Jucator : MonoBehaviour
     }
 
 
-    public void OnCollisionEnter(Collision obiect)
+    private void OnCollisionEnter(Collision obiect)
     {
         if (obiect.gameObject.CompareTag("VIS/Obstacole"))
         {
